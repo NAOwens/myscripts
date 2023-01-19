@@ -24,7 +24,6 @@ clear
 while read NAM UPG ENH BUG SEC
 do
   if [[ $UPG -eq 0 ]] && [[ $ENH -eq 0 ]] && [[ $BUG -eq 0 ]] && [[ $SEC -eq 0 ]]
-#  if [[ "$2" == "0" ]] && [[ "$3" == "0" ]] && [[ "$4" == "0" ]] && [[ "$5" == "0" ]]
   then
     let UPTODATE++
   else
