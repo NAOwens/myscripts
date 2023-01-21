@@ -2,6 +2,10 @@
 #This script uses hammer cli to query the satellite DB and produce a HOST errata report.
 #The output is saved to $PATCHRPT as a text file.  
 #Enter the name of your satellite server in the $SATSVR so that it is filtered out of the report. Satellite patching is separate.
+#In order to convert patch.rpt.txt to pdf follow these 3 steps
+#1.yum install vim
+#2 yum install ghostscript <to get ps2pdf>
+#3 vim patch.rpt.txt  -c "hardcopy > patch.rpt.ps | q"; ps2pdf patch.rpt.ps
 #Author: Norman Owens - Red Hat
 
 UPTODATE=0
