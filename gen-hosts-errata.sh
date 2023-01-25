@@ -48,4 +48,4 @@ echo "Stale systems: $STALE" | tee -a $PATCHRPT
 #vim $PATCHRPT  -c "hardcopy > $PATCHRPTPS | q"; ps2pdf $PATCHRPTPS
 
 #Email pdf file to MAILTO list
-#mailx -s "RHEL Patching Report" -a $PATCHRPTPDF $MAILTO < $OUTFILE
+#echo "RHEL Patching Report attached" | mailx -s "RHEL Patching Report" -a $PATCHRPTPDF $MAILTO 
