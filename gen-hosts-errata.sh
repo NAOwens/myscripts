@@ -8,12 +8,15 @@
 #3 vim patch.rpt.txt  -c "hardcopy > patch.rpt.ps | q"; ps2pdf patch.rpt.ps
 #Author: Norman Owens - Red Hat
 
+#MAILTO="user1@example.com user2@example.com"
 UPTODATE=0
 STALE=0
 SVRCOUNT=0
 SATSVR=<enter your sat server here>
 OUTFILE=/tmp/patch.staging.txt
 PATCHRPT=/tmp/patch.rpt.txt
+PATCHRPTPS=/tmp/patch.rpt.ps
+PATCHRPTPDF=./patch.rpt.pdf
 
 cat /dev/null > $OUTFILE
 cat /dev/null > $PATCHRPT
@@ -40,3 +43,9 @@ echo "Patch Systems Report `date +%m/%d/%Y`" | tee -a $PATCHRPT
 echo "Total Systems: $SVRCOUNT" | tee -a $PATCHRPT
 echo "Systems up to date: $UPTODATE" | tee -a $PATCHRPT
 echo "Stale systems: $STALE" | tee -a $PATCHRPT
+
+#Code for converting text file to pdf file
+#vim $PATCHRPT  -c "hardcopy > $PATCHRPTPS | q"; ps2pdf $PATCHRPTPS
+
+#Email pdf file to MAILTO list
+#mailx -s "RHEL Patching Report" -a $PATCHRPTPDF $MAILTO < $OUTFILE
