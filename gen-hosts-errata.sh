@@ -13,11 +13,12 @@ UPTODATE=0
 STALE=0
 SVRCOUNT=0
 SATSVR=<enter your sat server here>
+DTE=`date +%m/%d/%Y`
 OUTFILE=/tmp/patch.staging.txt
 PATCHRPT=/tmp/patch.rpt.txt
 PATCHRPTPS=/tmp/patch.rpt.ps
 PATCHRPTPDF=./patch.rpt.pdf
-PATCHRPTHTML=/tmp/patchrpt.html
+PATCHRPTHTML=/tmp/patchrpt-$DTE.html
 
 cat /dev/null > $OUTFILE
 cat /dev/null > $PATCHRPT
@@ -41,18 +42,18 @@ do
 done<$OUTFILE
 
 #Code to build text file
-echo "Patch Systems Report `date +%m/%d/%Y`" | tee -a $PATCHRPT
+echo "Patch Systems Report $DTE" | tee -a $PATCHRPT
 echo "Total Systems: $SVRCOUNT" | tee -a $PATCHRPT
 echo "Systems up to date: $UPTODATE" | tee -a $PATCHRPT
-echo "Stale systems: $STALE" | tee -a $PATCHRPT
+echo "Systems remaining to be patched: $STALE" | tee -a $PATCHRPT
 
 #Code to build html file
 echo "<!DOCTYPE html>" > $PATCHRPTHTML
 echo "<html><head><title>RHEL Patch Report</title></head><body><p>" >> $PATCHRPTHTML
-echo "RHEL Patch Report  `date +%m/%d/%Y` <br><br>" >> $PATCHRPTHTML
+echo "RHEL Patch Report  $DTE <br><br>" >> $PATCHRPTHTML
 echo "Total Systems: $SVRCOUNT <br>" >> $PATCHRPTHTML
 echo "Systems up to date: <font color='green'>$UPTODATE</font><br>" >> $PATCHRPTHTML
-echo "Stale systems: <font color='red'>$STALE</font><br></body></html>" >> $PATCHRPTHTML
+echo "Systems remaining to be patched: <font color='red'>$STALE</font><br></body></html>" >> $PATCHRPTHTML
 
 #Code for converting text file to pdf file
 #vim $PATCHRPT  -c "hardcopy > $PATCHRPTPS | q"; ps2pdf $PATCHRPTPS
