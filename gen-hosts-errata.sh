@@ -14,11 +14,12 @@ STALE=0
 SVRCOUNT=0
 SATSVR=<enter your sat server here>
 DTE=`date +%m/%d/%Y`
+DTE2=`date +%m%d%Y`
 OUTFILE=/tmp/patch.staging.txt
 PATCHRPT=/tmp/patch.rpt.txt
 PATCHRPTPS=/tmp/patch.rpt.ps
-PATCHRPTPDF=./patch.rpt.pdf
-PATCHRPTHTML=/tmp/patchrpt-$DTE.html
+PATCHRPTPDF=/tmp/patch.rpt.pdf
+PATCHRPTHTML=/tmp/patchrpt-$DTE2.html
 
 cat /dev/null > $OUTFILE
 cat /dev/null > $PATCHRPT
@@ -50,10 +51,10 @@ echo "Systems remaining to be patched: $STALE" | tee -a $PATCHRPT
 #Code to build html file
 echo "<!DOCTYPE html>" > $PATCHRPTHTML
 echo "<html><head><title>RHEL Patch Report</title></head><body><p>" >> $PATCHRPTHTML
-echo "RHEL Patch Report  $DTE <br><br>" >> $PATCHRPTHTML
-echo "Total Systems: $SVRCOUNT <br>" >> $PATCHRPTHTML
+echo "<h1>RHEL Patch Report  $DTE </h1>" >> $PATCHRPTHTML
+echo "<h2>Total Systems: $SVRCOUNT <br>" >> $PATCHRPTHTML
 echo "Systems up to date: <font color='green'>$UPTODATE</font><br>" >> $PATCHRPTHTML
-echo "Systems remaining to be patched: <font color='red'>$STALE</font><br></body></html>" >> $PATCHRPTHTML
+echo "Systems remaining to be patched: <font color='red'>$STALE</font></h2></body></html>" >> $PATCHRPTHTML
 
 #Code for converting text file to pdf file
 #vim $PATCHRPT  -c "hardcopy > $PATCHRPTPS | q"; ps2pdf $PATCHRPTPS
