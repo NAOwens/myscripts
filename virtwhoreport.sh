@@ -1,8 +1,10 @@
 #!/bin/bash
-#This script prints a report of the Satellite virt-who hosts and virt-who guests. Tested on RHEL8.7
+#This script prints a report of the Satellite virt-who hosts and virt-who guests. Tested on RHEL8.7 
+#/usr/bin/jq provided in RHEL 8 (Appstream) is required
 #Create TMPUSER in Satellite GUI with Administrator Role
 #Author: Norman Owens - Red Hat
 
+#MAILTO="user1@example.com user2@example.com"
 TMPUSER=<satellite user>
 TMPPWD=<satellite user pw>
 TMPSAT=<satellite server>
@@ -30,3 +32,6 @@ do
   fi
 echo "$i,$TMPLABEL,$TMPENT,$TMPCOUNT,," >> $TMPFILE 
 done 
+
+#Email csv file to MAILTO list
+#echo "Virt-who Report attached" | mailx -s "Virt-who Report" -a $TMPFILE $MAILTO
