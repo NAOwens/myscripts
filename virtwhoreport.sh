@@ -1,6 +1,7 @@
 #!/bin/bash
 #This script prints a report of the Satellite virt-who hosts and virt-who guests. Tested on RHEL8.7
 #Create TMPUSER in Satellite GUI with Administrator Role
+#Author: Norman Owens - Red Hat
 
 TMPUSER=<satellite user>
 TMPPWD=<satellite user pw>
